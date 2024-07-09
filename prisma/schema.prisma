@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+//  @@map("tb_categoria") estás mapeando el modelo Categoria a la tabla tb_categoria.
+
+model Categoria {
+  id          Int           @id @default(autoincrement())
+  nombre      String?       @db.VarChar(255)
+  descripcion String?       @db.VarChar(255)
+  productos Producto[]
+
+  @@map("tb_categoria")
+}
+
+model Producto {
+  id           Int           @id @default(autoincrement())
+  nombre       String?       @db.VarChar(255)
+  descripcion  String?       @db.VarChar(255)
+  stock        Int?
+  precio       Decimal?      @db.Decimal(8, 2)
+  idCategoria Int?          @map(name:"id_categoria") //FK
+  estado       Boolean?      @db.Bit(1)
+  categoria Categoria? @relation(fields: [idCategoria], references: [id])// relacion
+
+  @@index([idCategoria], map: "FK_IDCATEGORIA_idx")
+  @@map("tb_producto")
+}
+
+model Empleado {
+  id               Int       @id @default(autoincrement())
+  nombre           String?   @db.VarChar(255)
+  apellido         String?   @db.VarChar(255)
+  sueldo           Decimal?  @db.Decimal(8, 2)
+  fecha_nacimiento DateTime? @db.DateTime(0)
+  telefono         Int?
+
+  @@map("tb_empleado")
+}
+
+
+model Role {
+  id         Int          @id @default(autoincrement())
+  nombre     String?      @db.VarChar(255)
+  tb_usuario Usuario[]
+  @@map("tb_role")
+}
+
+model Usuario {
+  id       Int      @id @default(autoincrement())
+  nombre   String?  @db.VarChar(255)
+  apellido String?  @db.VarChar(255)
+  email    String?  @unique @db.VarChar(255)
+  password String?  @db.VarChar(255)
+  idRole   Int?
+  estado   Boolean? @db.Bit(1)
+  role  Role? @relation(fields: [idRole], references: [id])
+
+  @@index([idRole], map: "FK_IDROLE_idx")
+  @@map("tb_usuario")
+}
