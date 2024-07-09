@@ -7,7 +7,7 @@ import { roleMiddleware } from '../middlewares/authorize.handler';
 
 const router = express.Router()
 
-router.get('/empleado',authenticateToken,roleMiddleware('ADMIN'),getAllEmpleados)
+router.get('/empleado',authenticateToken,roleMiddleware('USER'),getAllEmpleados)
 router.get('/empleado/:id',authenticateToken, getEmpleadoById)
 router.post('/empleado',authenticateToken, roleMiddleware('ADMIN'), createEmpleado)
 router.put('/empleado/:id',authenticateToken, updateEmpleado)

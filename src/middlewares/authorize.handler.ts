@@ -7,6 +7,6 @@ interface RequestWithUserRole extends Request {
 }
 
 export const roleMiddleware = (requiredRole:string) => (req:RequestWithUserRole, res:Response, next:NextFunction) => {
-    if (req.user?.role !== requiredRole) return res.status(403).json({ error: 'Acceso denegado' });
+    if (req.user?.role !== requiredRole) return res.status(403).json({ error: 'Acceso No Autorizado' });
     next();
 };
