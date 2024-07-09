@@ -25,6 +25,7 @@ ts-node: Instala ts-node, una herramienta que permite ejecutar código TypeScrip
 - npx tsc --init
 > Un archivo tsconfig.json típico puede verse así: Es utilizado por el compilador de TypeScript (tsc) para definir cómo se debe compilar el código TypeScript a JavaScript.
 
+```json
 {
   "compilerOptions": {
     "target": "ES6",                // Versión de JavaScript de salida
@@ -36,7 +37,7 @@ ts-node: Instala ts-node, una herramienta que permite ejecutar código TypeScrip
   },
   "include": ["src/**/*"]           // Archivos incluidos en la compilación
 }
-
+```
  outDir : Define el directorio de salida para los archivos JavaScript compilados.
  >Ejemplo: Si tienes un archivo TypeScript src/app.ts y defines "outDir": "./dist", después de compilar, tsc generará dist/app.js en lugar de sobrescribir el archivo fuente src/app.ts.
  
@@ -58,13 +59,13 @@ Usar ts-node para ejecutar directamente el archivo TypeScript
 
  Para un desarrollo más eficiente, puedes usar ts-node-dev, que reinicia automáticamente el servidor cuando detecta cambios en tu código.
  Agregar un script de desarrollo en package.json:
- 
+ ```json
 {
   "scripts": {
     "dev": "ts-node-dev --respawn src/serve.ts"
     }
 }
-
+```
 - npm run dev
 ##  @types/ 
 >¿Por qué instalar @types/?
