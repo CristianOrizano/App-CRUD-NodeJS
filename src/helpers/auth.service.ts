@@ -8,8 +8,8 @@ import { Role, Usuario } from "@prisma/client";
 
 dotenv.config()
 const JWT_SECRET = process.env.JWT_SECRET || 'default-secret'
-
+const EXPIRA = process.env.EXPIRA || '30'
 export const generateToken = (usuario: Usuario& { role: Role | null }): string => {
     console.log("====>",JWT_SECRET)
-    return jwt.sign({ id: usuario.id, email: usuario.email,role: usuario.role?.nombre }, JWT_SECRET, { expiresIn: '1h' })
+    return jwt.sign({ id: usuario.id, email: usuario.email,role: usuario.role?.nombre }, JWT_SECRET, { expiresIn: parseInt(EXPIRA) })
 }
